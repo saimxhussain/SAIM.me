@@ -419,21 +419,31 @@
     border-bottom:1px solid var(--purple);
   }
 
-  .vgrid{ display:flex; align-items:flex-start; gap:14px; overflow-x:auto; padding-bottom:6px; }
-  .vgrid .vcard{ flex:0 0 auto; }
+  .vgrid{ display:flex; align-items:flex-start; gap:18px; overflow-x:auto; padding:6px 8px 18px 2px; scroll-snap-type:x proximity; scrollbar-width:thin; scrollbar-color:var(--purple) transparent; }
+  .vgrid .vcard{ flex:0 0 auto; scroll-snap-align:start; }
   .vcard{
     position:relative; flex:0 0 auto; background:#000;
-    border-radius:10px; overflow:hidden; border:2px solid var(--ink);
+    border-radius:14px; overflow:hidden; border:2px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    transition:transform .25s ease, box-shadow .25s ease;
   }
+  .vcard:hover{ transform:translate(-3px,-3px); box-shadow:8px 8px 0 var(--purple); }
+  .vcard.playing{ box-shadow:8px 8px 0 var(--purple); }
   .vcard video{ display:block; width:100%; height:100%; object-fit:cover; }
-  .vcard.ratio-916{ width:160px; aspect-ratio:9/16; }
-  .vcard.ratio-169{ width:300px; aspect-ratio:16/9; }
+  .vcard.ratio-916{ width:180px; aspect-ratio:9/16; }
+  .vcard.ratio-169{ width:320px; aspect-ratio:16/9; }
   .vcard.clickplay{ cursor:pointer; }
   .vcard.clickplay .playbtn{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    background:rgba(0,0,0,0.28); pointer-events:none; transition:opacity .2s ease;
+    background:linear-gradient(180deg,rgba(25,21,16,0) 40%,rgba(25,21,16,.55) 100%);
+    pointer-events:none; transition:opacity .25s ease;
   }
-  .vcard.clickplay .playbtn svg{ width:30px; height:30px; }
+  .vcard.clickplay .playbtn svg{
+    width:52px; height:52px; padding:13px 11px 13px 15px; box-sizing:border-box;
+    background:var(--purple); border:2px solid var(--ink); border-radius:50%;
+    box-shadow:3px 3px 0 var(--ink); transition:transform .25s ease;
+  }
+  .vcard.clickplay:hover .playbtn svg{ transform:scale(1.12); }
   .vcard.clickplay.playing .playbtn{ opacity:0; }
   .loop-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
   .loop-grid .vcard{ width:100%; }
@@ -1054,8 +1064,8 @@
 
     /* video grid */
     .vgrid{ gap:10px; }
-    .vcard.ratio-916{ width:130px; }
-    .vcard.ratio-169{ width:240px; }
+    .vcard.ratio-916{ width:140px; }
+    .vcard.ratio-169{ width:250px; }
     .loop-grid{ grid-template-columns:1fr 1fr; gap:10px; }
 
     /* subblock */
@@ -2025,20 +2035,33 @@
     proofBg.addEventListener('click', function(){ proofLightbox.classList.remove('open'); });
   }
 
-  document.querySelectorAll('.vcard.clickplay').forEach(function(card){
+  var allCards = document.querySelectorAll('.vcard.clickplay');
+  allCards.forEach(function(card){
     var vid = card.querySelector('video');
     card.addEventListener('click', function(){
-      if(vid.paused){
-        vid.muted = false;
-        vid.setAttribute('controls','');
-        vid.play();
-        card.classList.add('playing');
-      } else {
-        vid.pause();
-        card.classList.remove('playing');
-      }
+      // once native controls are on, they handle play/pause themselves
+      if(vid.hasAttribute('controls')) return;
+      allCards.forEach(function(c){
+        var v = c.querySelector('video');
+        if(v !== vid && !v.paused) v.pause();
+      });
+      vid.muted = false;
+      vid.setAttribute('controls','');
+      vid.play();
+    });
+    vid.addEventListener('play', function(){
+      allCards.forEach(function(c){
+        var v = c.querySelector('video');
+        if(v !== vid && !v.paused) v.pause();
+      });
+      card.classList.add('playing');
     });
     vid.addEventListener('pause', function(){ card.classList.remove('playing'); });
+    vid.addEventListener('ended', function(){
+      card.classList.remove('playing');
+      vid.removeAttribute('controls');
+      vid.currentTime = 0;
+    });
   });
 </script>
 
