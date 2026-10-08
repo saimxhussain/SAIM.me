@@ -445,6 +445,28 @@
   }
   .vcard.clickplay:hover .playbtn svg{ transform:scale(1.12); }
   .vcard.clickplay.playing .playbtn{ opacity:0; }
+
+  /* --- SKILL ROUTER: landing shows hero + about + content; skill view shows hero + one skill --- */
+  #video-editing,#digital-marketing,#business-dev,#web-dev,#automation,#lead-scraping,#sales,#graphic-design{ display:none; }
+  #video-editing.active,#digital-marketing.active,#business-dev.active,#web-dev.active,#automation.active,#lead-scraping.active,#sales.active,#graphic-design.active{ display:block; }
+  body.skill-view #about, body.skill-view #content{ display:none; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:26px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:14px;
+    color:var(--ink); text-decoration:none; background:#fff;
+    border:2px solid var(--ink); border-radius:999px; padding:6px 16px;
+    box-shadow:3px 3px 0 var(--ink); transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .back-link:hover{ transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--purple); }
+  .more-skills{ margin-top:56px; padding-top:28px; border-top:2px dashed var(--ink); }
+  .more-skills h4{ font-family:'Baloo 2',sans-serif; font-size:16px; margin:0 0 14px; }
+  .more-skills .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .more-skills .chips a{
+    text-decoration:none; color:#fff; font-weight:600; font-size:13px;
+    padding:8px 16px; border-radius:999px; border:2px solid var(--ink);
+    box-shadow:3px 3px 0 var(--ink); transition:transform .2s ease;
+  }
+  .more-skills .chips a:hover{ transform:translate(-2px,-2px); }
   .loop-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
   .loop-grid .vcard{ width:100%; }
 
@@ -1153,6 +1175,7 @@
 <div class="skill-menu" id="skillMenu">
   <div class="close-x" id="closeMenu">Close</div>
   <ul>
+    <li><a href="#content">All Skills</a></li>
     <li><a href="#video-editing">Video Editing</a></li>
     <li><a href="#digital-marketing">Digital Marketing</a></li>
     <li><a href="#business-dev">Business Dev</a></li>
@@ -2063,6 +2086,48 @@
       vid.currentTime = 0;
     });
   });
+
+  // ---- Skill router (hash based) ----
+  var SKILLS = [
+    ['video-editing','Video Editing','var(--c1)'],['digital-marketing','Digital Marketing','var(--c2)'],
+    ['business-dev','Business Dev','var(--c3)'],['web-dev','Web Dev','var(--c4)'],
+    ['automation','Automation','var(--c5)'],['lead-scraping','Lead Scraping','var(--c6)'],
+    ['sales','Sales','var(--c7)'],['graphic-design','Graphic Design','var(--c8)']
+  ];
+  SKILLS.forEach(function(sk){
+    var sec = document.getElementById(sk[0]);
+    if(!sec) return;
+    var wrap = sec.querySelector('.wrap') || sec;
+    var back = document.createElement('a');
+    back.className = 'back-link'; back.href = '#content'; back.textContent = '\u2190 All skills';
+    wrap.insertBefore(back, wrap.firstChild);
+    var more = document.createElement('div');
+    more.className = 'more-skills';
+    more.innerHTML = '<h4>Explore other skills</h4><div class="chips">' +
+      SKILLS.filter(function(o){ return o[0] !== sk[0]; }).map(function(o){
+        return '<a href="#' + o[0] + '" style="background:' + o[2] + '">' + o[1] + '</a>';
+      }).join('') + '</div>';
+    wrap.appendChild(more);
+  });
+  function route(){
+    var id = (location.hash || '').slice(1);
+    var isSkill = SKILLS.some(function(sk){ return sk[0] === id; });
+    document.querySelectorAll('video').forEach(function(v){ if(!v.hasAttribute('autoplay') && !v.paused) v.pause(); });
+    SKILLS.forEach(function(sk){
+      var el = document.getElementById(sk[0]);
+      if(el) el.classList.toggle('active', sk[0] === id);
+    });
+    document.body.classList.toggle('skill-view', isSkill);
+    if(isSkill){
+      var t = document.getElementById(id);
+      requestAnimationFrame(function(){ window.scrollTo(0, t.getBoundingClientRect().top + window.pageYOffset - 70); });
+    } else if(id === 'content' || id === 'about'){
+      var c = document.getElementById(id);
+      requestAnimationFrame(function(){ c.scrollIntoView(); });
+    }
+  }
+  window.addEventListener('hashchange', route);
+  route();
 </script>
 
 </body>
