@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saim Hussain — Portfolio</title>
+<title>Sales — Saim Hussain</title>
 <meta name="description" content="Saim Hussain — creative professional in AI automation, web development, video editing, and digital marketing. Video Editing, Digital Marketing, Business Dev, Web Dev, Automation, Lead Scraping, Sales, Graphic Design.">
 
 <!-- Open Graph / Facebook, WhatsApp, Instagram, Messenger -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://saim-me.vercel.app/">
-<meta property="og:title" content="Saim Hussain — Portfolio">
+<meta property="og:url" content="https://saim-me.vercel.app/sales">
+<meta property="og:title" content="Sales — Saim Hussain">
 <meta property="og:description" content="Creative professional in AI automation, web development, video editing, and digital marketing. Turning ideas into impactful visuals and web experiences.">
 <meta property="og:image" content="https://res.cloudinary.com/dy4yjeeib/image/upload/v1789251660/image_rolwvm.png">
 <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://saim-me.vercel.app/">
-<meta name="twitter:title" content="Saim Hussain — Portfolio">
+<meta name="twitter:title" content="Sales — Saim Hussain">
 <meta name="twitter:description" content="Creative professional in AI automation, web development, video editing, and digital marketing. Turning ideas into impactful visuals and web experiences.">
 <meta name="twitter:image" content="https://res.cloudinary.com/dy4yjeeib/image/upload/v1789251660/image_rolwvm.png">
 
@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/style.css">
 
 </head>
-<body>
+<body data-skill="sales">
 
 
 <div class="mininav">
@@ -59,28 +59,86 @@
   <div class="hero-bg"></div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about"></section>
-
-<!-- CONTENT INDEX -->
-<section class="content-index" id="content">
-  <div class="sticker lime tl" style="transform:rotate(-12deg);"></div>
-  <div class="sticker purple tr" style="transform:rotate(18deg);"></div>
-  <div class="sticker lime br" style="transform:rotate(8deg);"></div>
-  <div class="sticker lime bl" style="transform:rotate(-20deg);"></div>
-  <div class="sticker purple mid" style="transform:rotate(25deg);"></div>
+<section class="section" id="sales" style="padding-top:32px;padding-bottom:32px;">
   <div class="wrap">
-    <h2 class="display">Content</h2>
-    <div class="content-grid">
-      <a class="content-block b1" href="/video-editing"><span>Video Editing</span><span class="n">1</span></a>
-      <a class="content-block b2" href="/digital-marketing"><span>Digital Marketing</span><span class="n">2</span></a>
-      <a class="content-block b3" href="/business-dev"><span>Business Dev</span><span class="n">3</span></a>
-      <a class="content-block b4" href="/web-dev"><span>Web Dev</span><span class="n">4</span></a>
-      <a class="content-block b5" href="/automation"><span>Automation</span><span class="n">5</span></a>
-      <a class="content-block b6" href="/lead-scraping"><span>Lead Scraping</span><span class="n">6</span></a>
-      <a class="content-block b7" href="/sales"><span>Sales</span><span class="n">7</span></a>
-      <a class="content-block b8" href="/graphic-design"><span>Graphic Design</span><span class="n">8</span></a>
+    <a class="back-link" href="/#content">← All skills</a>
+    <div class="section-head">
+      <span class="tag" style="background:var(--c7);">07</span>
+      <h2 class="display">Sales</h2>
     </div>
+
+    <!-- Metrics strip -->
+    <div class="sales-strip">
+      <div class="sales-stat"><span class="ss-num">500+</span><span class="ss-label">Cold Calls Made</span></div>
+      <div class="sales-stat-div"></div>
+      <div class="sales-stat"><span class="ss-num">18%</span><span class="ss-label">Connect Rate</span></div>
+      <div class="sales-stat-div"></div>
+      <div class="sales-stat"><span class="ss-num">12%</span><span class="ss-label">Demo Close Rate</span></div>
+      <div class="sales-stat-div"></div>
+      <div class="sales-stat"><span class="ss-num">3</span><span class="ss-label">Active Closers</span></div>
+    </div>
+
+    <!-- Script viewer -->
+    <div class="script-viewer">
+      <div class="script-tabs">
+        <button class="script-tab active" data-tab="cold">Cold Call</button>
+        <button class="script-tab" data-tab="followup">Follow-up</button>
+        <button class="script-tab" data-tab="objection">Objections</button>
+      </div>
+
+      <div class="script-body" id="tab-cold">
+        <div class="script-label">Opening</div>
+        <div class="script-line">"Hey [Name], this is Saim — I help businesses automate their lead gen and social media so their team can focus on closing, not chasing. Got 60 seconds?"</div>
+        <div class="script-label">Hook</div>
+        <div class="script-line">"Most of our clients were spending 20–30 hours a week on manual outreach. We cut that to almost zero with a custom automation stack. Is that something you're dealing with right now?"</div>
+        <div class="script-label">CTA</div>
+        <div class="script-line">"I'd love to show you exactly how it works — takes 15 minutes on a Zoom. What does your week look like?"</div>
+      </div>
+
+      <div class="script-body hidden" id="tab-followup">
+        <div class="script-label">Opening</div>
+        <div class="script-line">"Hey [Name], Saim here — we spoke last [day]. Just wanted to circle back since you mentioned you were evaluating options."</div>
+        <div class="script-label">Value Reminder</div>
+        <div class="script-line">"I actually put together a quick breakdown of what an automation stack would look like specifically for your business. Took me 10 minutes — figured it'd be useful either way."</div>
+        <div class="script-label">CTA</div>
+        <div class="script-line">"Can I send it over? And if the timing's off, just say the word — no pressure at all."</div>
+      </div>
+
+      <div class="script-body hidden" id="tab-objection">
+        <div class="obj-row">
+          <div class="obj-q">"We already have a team for this."</div>
+          <div class="obj-a">→ "That's great — we actually work alongside existing teams. Our automations handle the repetitive stuff so your team can focus on strategy and relationship-building."</div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-q">"It's too expensive."</div>
+          <div class="obj-a">→ "Totally fair. Most clients recover the cost within the first month just from time saved. Want me to walk you through the math real quick?"</div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-q">"We've tried automation before and it didn't work."</div>
+          <div class="obj-a">→ "That's actually the most common thing I hear. Usually it's because the workflow wasn't built around the business — ours are fully custom. What specifically broke down for you?"</div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-q">"Send me an email."</div>
+          <div class="obj-a">→ "Will do — and just so the email is actually useful, what's the one thing taking up most of your team's time right now?"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="sales-tools-wrap">
+      <div class="sales-tools-label">Tools I use</div>
+      <div class="sales-tools">
+        <span class="sales-tool">📞 JustCall</span>
+        <span class="sales-tool">🔗 LinkedIn Sales Nav</span>
+        <span class="sales-tool">📋 GoHighLevel</span>
+        <span class="sales-tool">🤖 n8n</span>
+        <span class="sales-tool">📧 Instantly.ai</span>
+        <span class="sales-tool">🔍 Apollo.io</span>
+      </div>
+    </div>
+
+      <div class="more-skills"><h4>Explore other skills</h4><div class="chips"><a href="/video-editing" style="background:var(--c1)">Video Editing</a><a href="/digital-marketing" style="background:var(--c2)">Digital Marketing</a><a href="/business-dev" style="background:var(--c3)">Business Dev</a><a href="/web-dev" style="background:var(--c4)">Web Dev</a><a href="/automation" style="background:var(--c5)">Automation</a><a href="/lead-scraping" style="background:var(--c6)">Lead Scraping</a><a href="/graphic-design" style="background:var(--c8)">Graphic Design</a></div></div>
+  
   </div>
 </section>
 
